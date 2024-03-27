@@ -1,0 +1,27 @@
+1. 
+SELECT sweet, COUNT(*) AS count_sweet FROM characteristics_table GROUP BY sweet;
+SELECT acidity, COUNT(*) AS count_acidity FROM characteristics_table GROUP BY acidity;
+SELECT body, COUNT(*) AS count_body FROM characteristics_table GROUP BY body;
+SELECT tannin, COUNT(*) AS count_tannin FROM characteristics_table GROUP BY tannin;
+
+2.
+SELECT abv, AVG(price) AS avg_price FROM characteristics_table INNER JOIN sales_table ON characteristics_table.id = sales_table.characteristics_id GROUP BY abv;
+
+3.
+SELECT year, AVG(price) AS avg_price FROM sales_table GROUP BY year;
+
+4.
+SELECT v.variety, c.sweet, c.acidity, c.body, c.tannin FROM varieties_table v 
+INNER JOIN sales_table s ON v.id = s.variety_id 
+INNER JOIN characteristics_table c ON s.characteristics_id = c.id;
+
+5.
+SELECT nation, COUNT(*) AS production_count FROM locations_table GROUP BY nation;
+
+6.
+SELECT p.name, COUNT(*) AS total_sales FROM products_table p 
+INNER JOIN sales_table s ON p.id = s.product_id 
+GROUP BY p.name ORDER BY total_sales DESC;
+
+7.
+SELECT p.type, COUNT(*) AS count_type FROM products_table p GROUP BY p.type;
