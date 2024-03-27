@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS sales_table (
     variety_id INTEGER,
     characteristics_id INTEGER,
     price INTEGER,
+    year INTEGER,  -- Ajout de la colonne "year"
     FOREIGN KEY (product_id) REFERENCES products_table (id),
     FOREIGN KEY (location_id) REFERENCES locations_table (id),
     FOREIGN KEY (variety_id) REFERENCES varieties_table (id),
@@ -112,11 +113,12 @@ for index, row in df.iterrows():
     characteristics_id = cur.fetchone()[0]
 
     # Insert data into sales_table
-    sales_insert_sql = "INSERT INTO sales_table (product_id, location_id, variety_id, characteristics_id, price) VALUES (?, ?, ?, ?, ?)"
-    cur.execute(sales_insert_sql, (product_id, location_id, variety_id, characteristics_id, row['price']))
+    sales_insert_sql = "INSERT INTO sales_table (product_id, location_id, variety_id, characteristics_id, price, year) VALUES (?, ?, ?, ?, ?, ?)"
+    cur.execute(sales_insert_sql, (product_id, location_id, variety_id, characteristics_id, row['price'], row['year']))
 
 # Commit changes to the sales table
 conn.commit()
 
 # Close connection
 conn.close()
+
